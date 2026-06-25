@@ -7,15 +7,15 @@ const cookieStore = await cookies();
 return cookieStore.get(TOKEN_KEY)?.value;
 }
 
-export async function setToken(token: string): Promise<void>{
-    const cookieStore = await cookies();
-    cookieStore.set(TOKEN_KEY, token, {
-        httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
-        maxAge: 60 * 60 * 24 * 7,
-        path: '/',
-    });
+export async function setToken(token: string): Promise<void> {
+  const cookieStore = await cookies();
+  cookieStore.set(TOKEN_KEY, token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', // true on Vercel, false locally
+    sameSite: 'lax',
+    maxAge: 60 * 60 * 24,
+    path: '/',
+  });
 }
 
 export async function deleteToken(): Promise<void>{
