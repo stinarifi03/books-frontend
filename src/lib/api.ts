@@ -1,4 +1,5 @@
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+console.log('BASE_URL:', BASE_URL);
 
 async function request<T>(
     endpoint: string,
